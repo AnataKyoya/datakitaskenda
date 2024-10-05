@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menampilkan Gambar</title>
+    <style>
+        .card {
+            margin: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<div id="imageContainer"></div>
+
+<script>
+    async function loadImages() {
+        const response = await fetch('getImg.php');
+        const images = await response.json();
+
+        const container = document.getElementById('imageContainer');
+
+        images.forEach((src, i) => {
+            let c = document.createElement("div");
+            c.className = "card num" + i;
+
+            let h = document.createElement("img");
+            h.src = src;
+            h.alt = "Image " + (i + 1);
+            h.style.width = "100px"; // Set ukuran gambar sesuai kebutuhan
+
+            c.appendChild(h);
+            container.appendChild(c);
+        });
+    }
+
+    loadImages();
+</script>
+
+</body>
+</html>
